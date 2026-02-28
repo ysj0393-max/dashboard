@@ -1,0 +1,5 @@
+# Suhobot Dashboard
+
+streamlit
+pandas
+numpy
