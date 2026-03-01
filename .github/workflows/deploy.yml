@@ -1,0 +1,23 @@
+name: Deploy to Streamlit Cloud
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy to Streamlit
+      run: |
+        echo "Deploying to Streamlit Cloud..."
+        curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.STREAMLIT_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          https://api.streamlit.io/v1/apps \
+          -d '{
+            "repository": "ysj0393-max/dashboard",
+            "branch": "master",
+            "mainFile": "app_v2.py"
+          }' || echo "Manual deploy required"
